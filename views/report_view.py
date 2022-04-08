@@ -3,13 +3,13 @@ def print_menu_report():
     print("Rapports:\n")
     print("1 : Afficher les acteurs par ordre alphabétique ")
     print("2 : Afficher les acteurs par ordre de elo ")
-    print("3 : Infos d'un tournoi ")
+    print("3 : Infos d'un tournoi \n")
 
 
 def print_report_players_and_elo(players):
     for player in players:
         print(
-            f"{player['first_name']} {player['last_name']} : elo = {player['last_name']} {player['elo']}"
+            f"{player['last_name']} {player['first_name']} : elo = {player['last_name']} {player['elo']}"
         )
 
 
@@ -22,14 +22,14 @@ def print_tournament_name(tournaments):
 
 def print_tournament_players(players):
     print("--------------------------------------------------\n")
-    print("Menu tournoi:\n")
+    print("Menu joueurs du tournoi:\n")
     for player in players:
         print(f"{player['last_name']} {player['first_name']} : elo = {player['elo']} ")
 
 
 def print_tournaments_menu():
     print("--------------------------------------------------\n")
-    print("Infos d'un tournoi:\n")
+    print("Infos d'un tournoi: \n")
     print("1 : Afficher les joueurs du tournoi par ordre alphabétique ")
     print("2 : Afficher les joueurs du tournoi par ordre elo ")
     print("3 : Liste de tous les tours d'un tournoi ")
@@ -38,7 +38,7 @@ def print_tournaments_menu():
 
 def print_tournament_rounds(rounds):
     print("--------------------------------------------------\n")
-    print("Menu tournoi:\n")
+    print("Menu rounds du tournoi:\n")
     for round in rounds:
         print(
             f"{round['number']} : start : {round['start_time']} : end : {round['end_time']}"
@@ -47,7 +47,7 @@ def print_tournament_rounds(rounds):
 
 def print_tournament_matchs(rounds):
     print("--------------------------------------------------\n")
-    print("Menu tournoi:\n")
+    print("Menu matchs tournoi:\n")
     for round in rounds:
         print("---------------------------------------")
         print(f"{round['number']} :")

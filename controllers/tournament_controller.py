@@ -30,39 +30,39 @@ class TournamentController:
         self.tournament = None
 
     def run_new_tournament(self):
-        """name = self.get_and_check_user_text_input(
-        "Entrez le nom du tournoi : ")"""
-        name = "Test"
-        """place = self.get_and_check_user_text_input(
-            "Entrez le lieu du tournoi : ")"""
-        place = "Paris"
-        # date_string = self.get_and_check_date_input("Entrer la date: ")
-        date_string = "12-12-2013"
-        # controller_temp = self.get_and_check_controller_temp(
-        # "Entrer le type de tournois: ")
-        controller_temp = "bullet"
-        """description = self.get_and_check_user_text_input(
-            "Entrer description : ")"""
-        description = "hello world"
+        name = self.get_and_check_user_text_input(
+            "Entrez le nom du tournoi : ")
+        # name = "Test"
+        place = self.get_and_check_user_text_input(
+            "Entrez le lieu du tournoi : ")
+        # place = "Paris"
+        date_string = self.get_and_check_date_input("Entrer la date: ")
+        # date_string = "12-12-2013"
+        controller_temp = self.get_and_check_controller_temp(
+            "Entrer le type de tournois: ")
+        # controller_temp = "bullet"
+        description = self.get_and_check_user_text_input(
+            "Entrer description : ")
+        # description = "hello world"
         self.tournament = Tournament(
             name, place, date_string, controller_temp, description
         )
-        # for i in range(8):
-        #     print_message(f"------------------------------------")
-        #     print_message(f"Entrez information du joueur {i+1} :")
-        #     last_name = self.get_and_check_user_text_input(
-        #         "Entrez le nom de famille du joueur : ")
-        #     first_name = self.get_and_check_user_text_input(
-        #         "Entrer le prenom du joueur: ")
-        #     birthday = self.get_and_check_date_input(
-        #         "Entrer date de naissance du joueur : ")
-        #     sex = self.get_and_check_sex_input("Entrer le sexe du joueur: ")
-        #     elo = self.get_and_check_elo_input("Entrez elo du joueur : ")
-        #     player = Player(last_name, first_name, birthday, sex, elo)
-        #     self.tournament.add_player(player)
-        #     self.tournament.save_player(player)
+        for i in range(8):
+            print_message(f"------------------------------------")
+            print_message(f"Entrez information du joueur {i+1} :")
+            last_name = self.get_and_check_user_text_input(
+                "Entrez le nom de famille du joueur : ")
+            first_name = self.get_and_check_user_text_input(
+                "Entrer le prenom du joueur: ")
+            birthday = self.get_and_check_date_input(
+                "Entrer date de naissance du joueur : ")
+            sex = self.get_and_check_sex_input("Entrer le sexe du joueur: ")
+            elo = self.get_and_check_elo_input("Entrez elo du joueur : ")
+            player = Player(last_name, first_name, birthday, sex, elo)
+            self.tournament.add_player(player)
+            self.tournament.save_player(player)
 
-        self.tournament.players = PLAYERS
+        # self.tournament.players = PLAYERS
         self.run_first_round()
         if self.is_stop_and_save_tournament("voulez vous areter le tournoi ? : "):
             return
@@ -116,7 +116,7 @@ class TournamentController:
 
         self.tournament.update(name)
         print_classement(self.tournament.players)
-        self.tournament.update()
+        self.tournament.update(name)
 
     def deserializer(self, tournament):
         self.tournament = Tournament(
@@ -167,7 +167,6 @@ class TournamentController:
                 reload_round.add_match(reload_match)
 
             self.tournament.add_round(reload_round)
-        print(self.tournament.serializer())
 
     def get_tournament_to_reload(self):
         message = "Quel tournoi souhaitez vous reprendre ?"
@@ -179,7 +178,7 @@ class TournamentController:
         return user_input
 
     def get_and_check_user_text_input(self, message):
-        user_input = get_user_input(message)
+        user_input = get_user_input(message).capitalize()
         while not user_input.isalpha():
             user_input = get_user_input(f"Error : {message}")
         return user_input
