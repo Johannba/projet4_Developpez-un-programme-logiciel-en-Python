@@ -13,18 +13,6 @@ from views.matchs_view import score_match
 import datetime
 
 
-PLAYERS = [
-    Player("Gonnage", "Ranga", "12-12-1212", "M", 2),
-    Player("Bacha", "Johann", "11-09-1958", "M", 5),
-    Player("Dupond", "André", "10-12-1212", "M", 7),
-    Player("Mahe", "Jonathan", "09-12-1212", "M", 3),
-    Player("Kouyate", "Sacké", "08-12-1212", "M", 2),
-    Player("Heilles", "Simon", "07-12-1212", "M", 8),
-    Player("Wirth", "Olivier", "06-12-1212", "M", 6),
-    Player("Cinquennois", "Laititia", "05-12-1212", "F", 4),
-]
-
-
 class TournamentController:
     def __init__(self):
         self.tournament = None
@@ -32,18 +20,13 @@ class TournamentController:
     def run_new_tournament(self):
         name = self.get_and_check_user_text_input(
             "Entrez le nom du tournoi : ")
-        # name = "Test"
         place = self.get_and_check_user_text_input(
             "Entrez le lieu du tournoi : ")
-        # place = "Paris"
         date_string = self.get_and_check_date_input("Entrer la date: ")
-        # date_string = "12-12-2013"
         controller_temp = self.get_and_check_controller_temp(
             "Entrer le type de tournois: ")
-        # controller_temp = "bullet"
         description = self.get_and_check_user_text_input(
             "Entrer description : ")
-        # description = "hello world"
         self.tournament = Tournament(
             name, place, date_string, controller_temp, description
         )
@@ -62,7 +45,6 @@ class TournamentController:
             self.tournament.add_player(player)
             self.tournament.save_player(player)
 
-        # self.tournament.players = PLAYERS
         self.run_first_round()
         if self.is_stop_and_save_tournament("voulez vous areter le tournoi ? : "):
             return

@@ -8,6 +8,7 @@ from views.report_view import (
     print_tournament_players,
     print_tournament_rounds,
     print_tournament_matchs,
+    print_get_players,
 )
 from models.tournament import Tournament
 from views.tournament_view import get_user_input
@@ -19,9 +20,6 @@ class MenuController:
 
     def run(self):
         self.menu_home()
-        # self.tournament.get_list_tournaments()
-        # self.controller.run_reload_tournament()
-        # self.controller.run_reload_tournament()
 
     def menu_home(self):
         while True:
@@ -37,9 +35,9 @@ class MenuController:
                 exit()
 
     def get_and_check_menu_home(self, message):
-        user_input = input("Tapez ici :")
+        user_input = get_user_input("Tapez ici :")
         while user_input not in ["1", "2", "3", "4"]:
-            user_input = input(f"Error : {message}")
+            user_input = get_user_input(f"Error : {message}")
         return user_input
 
     def menu_report(self, players):
@@ -51,13 +49,15 @@ class MenuController:
             self.get_try_elo(players)
         elif chosen_option == "3":
             self.list_tournaments_name()
+        elif chosen_option == "4":
+            self.elos_modify()
         else:
             exit()
 
     def get_and_check_menu_report(self, message):
-        user_input = input("Tapez ici :")
-        while user_input not in ["1", "2", "3"]:
-            user_input = input(f"Error : {message}")
+        user_input = get_user_input("Tapez ici :")
+        while user_input not in ["1", "2", "3", "4"]:
+            user_input = get_user_input(f"Error : {message}")
         return user_input
 
     def get_alphabetic_actors(self, players):
@@ -94,9 +94,9 @@ class MenuController:
             exit()
 
     def get_and_check_menu_tournaments(self, message):
-        user_input = input("Tapez ici :")
+        user_input = get_user_input("Tapez ici :")
         while user_input not in ["1", "2", "3", "4"]:
-            user_input = input(f"Error : {message}")
+            user_input = get_user_input(f"Error : {message}")
         return user_input
 
     def tournament_players(self):
@@ -108,6 +108,7 @@ class MenuController:
         elos = Tournament.get_list_tournaments()[1]["players"]
         elos.sort(key=lambda x: x["elo"])
         print_tournament_players(elos)
+        return elos
 
     def list_round_tournament(self):
         round = Tournament.get_list_tournaments()[1]["rounds"]
@@ -116,3 +117,18 @@ class MenuController:
     def list_matchs_tournament(self):
         round = Tournament.get_list_tournaments()[1]["rounds"]
         print_tournament_matchs(round)
+
+    def elos_modify(self):
+        players = Tournament.get_players()
+        print_get_players(players)
+        id_player = self.get_and_check_id_players()
+        new_elo = get_user_input("tapez le nouveau classement: ")
+        Tournament.update_player_elo(int(id_player), new_elo)
+
+    def get_and_check_id_players(self):
+        message = "choissez l'id du joueur:  "
+        ids = Tournament.get_id()
+        user_input = get_user_input(message)
+        while user_input not in ids:
+            user_input = get_user_input(f"Error : {message}")
+        return user_input

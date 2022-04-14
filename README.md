@@ -51,13 +51,15 @@ README.md*flake-report*models*controllers*main.py*views
 
 Creer un environnement virtuel:
 
-Depuis windows/mac/linux: python3 -m venv env
+Depuis windows/mac/linux: `python3 -m venv env`
 
 Activer l'environnement:
 
-Depuis windows: env\Scripts\activate.bat
+Depuis windows: `env\Scripts\activate.bat`
 
-Depuis mac/linux: source env/bin/activate
+Depuis mac/linux: `source env/bin/activate`
+
+Installation des dépendances : `pip install -r requirements.txt`
 
 Si vous rencontrez des difficultés ou si vous souhaitez plus de détails sur l'installation d'un environnement virtuel, vous pouvez vous reporter à la documentation Python:
 
@@ -65,7 +67,7 @@ https://docs.python.org/fr/3/library/venv.html?highlight=venv
 
 Lancement du programme:
 
-pyhton main.py
+`python main.py`
 
 Ensuite suivez les instructions du menu
 
@@ -80,11 +82,11 @@ cd [chemin d'accès]
 
 Installer flake8-html :
 
-pip installer flake8-html
+`pip installer flake8-html`
 
 Ensuite, exécutez flake8 en passant l' option --format=html et un --htmldir :
 
-flake8 --format = html --htmldir = flake-rapport
+`flake8 --format = html --htmldir = flake-rapport`
 
 
 Fabriqué avec:

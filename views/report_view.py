@@ -3,7 +3,8 @@ def print_menu_report():
     print("Rapports:\n")
     print("1 : Afficher les acteurs par ordre alphabétique ")
     print("2 : Afficher les acteurs par ordre de elo ")
-    print("3 : Infos d'un tournoi \n")
+    print("3 : Infos d'un tournoi ")
+    print("4 : Modifier le classement d'un joueur \n")
 
 
 def print_report_players_and_elo(players):
@@ -57,3 +58,10 @@ def print_tournament_matchs(rounds):
                 f"{match['player1']['first_name']} VS {match['player2']['first_name']}"
             )
             print(f"Score : {match['player1']['score']} : {match['player2']['score']}")
+
+
+def print_get_players(players):
+    for player in players:
+        print(
+            f"id = {player.doc_id} {player['last_name']} {player['first_name']} : elo = {player['elo']}"
+        )

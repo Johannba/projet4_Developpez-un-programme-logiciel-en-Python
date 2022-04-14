@@ -1,4 +1,4 @@
-from tinydb import TinyDB, Query
+from tinydb import TinyDB, Query, where
 
 
 class Tournament:
@@ -11,11 +11,6 @@ class Tournament:
         self.controller_temp = controller_temp
         self.description = description
         self.number_tour = number_tour
-
-    def print_info(self):
-        print(self.name, self.place, self.date)
-        for player in self.players:
-            print(player.first_name, player.elo)
 
     def add_player(self, player):
         self.players.append(player)
@@ -85,10 +80,35 @@ class Tournament:
         return players_ongoing
 
     @classmethod
-    def get_list_tournaments(Tounament):
+    def get_list_tournaments(tounament):
         db = TinyDB("db.json", indent=4)
         tournaments = db.table("Tournaments")
         tournaments_list = []
         for tournament in tournaments:
             tournaments_list.append(tournament["name"])
         return tournaments_list, tournament
+
+    @staticmethod
+    def get_players():
+        db = TinyDB("db.json", indent=4)
+        players = db.table("Players")
+        dictionary = players.all()
+        return dictionary
+
+    @staticmethod
+    def update_player_elo(id_player, new_elo):
+        db = TinyDB("db.json", indent=4)
+        players = db.table("Players")
+        players.update({"elo": new_elo}, doc_ids=[id_player])
+
+    @staticmethod
+    def get_id():
+        db = TinyDB("db.json", indent=4)
+        table = db.table("Players")
+        ids = [item.doc_id for item in table.all()]
+        return str(ids)
+
+
+# test = Tournament("name", "place", "date", "c", "d")
+
+# print(test.get_id())
